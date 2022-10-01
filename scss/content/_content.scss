@@ -1,0 +1,109 @@
+@use '../assets/assets' as *;
+
+.content{
+    background-color: $dark-grayish-blue;
+    border-radius: 12px;
+    position: relative;
+
+    &__box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: clamp(450px, 40vw, 600px);
+        padding: 32px 40px 64px;
+        position: relative;
+        overflow: hidden;
+    }
+    transition: height 1s ease;
+
+    &__wave{
+        font-size: .7rem;
+        margin: 0 0 8px;
+    }
+
+    &__number{
+        color: $neon-green;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: .7rem;
+        font-weight: 600;
+        overflow: hidden;
+        display: flex;
+        gap: 8px;
+    }
+    
+    &__id{
+        display: block;
+        transform: scaleX(1);
+        transform-origin: left;
+        transition: transform .5s ease;
+        
+        &--active{
+            transform: scaleX(0);
+        }
+    }
+
+    &__title{
+        text-align: center;
+        font-size: clamp(24px, 2vw, 32px);
+        margin: 32px 0;
+        
+        &--active{
+            animation: titleAnimation 2s ease both;
+        }
+        &--desactive{
+            animation: titleAnimationTwo 2s ease both;
+        }
+    }
+
+    @keyframes titleAnimation{
+        0%{ transform: translateX(0px)}
+        100%{ transform: translateX( clamp(450px, 40vw, 600px))}
+    }
+
+    @keyframes titleAnimationTwo{
+        0%{ transform: translateX(clamp(-450px, -40vw, -600px))}
+        100%{ transform: translateX( 0)}
+    }
+
+    &__button{
+        --width: 56px;
+        background-color: $neon-green;
+        width: var(--width);
+        padding: 16px;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        position: absolute;
+        left: 50%;
+        bottom: calc(0% - var(--width) / 2);
+        transform: translateX(-50%);
+        cursor: pointer;
+        outline: none;
+        border: none;
+        transition: box-shadow .3s ease;
+
+        &:hover > img{
+            transition: rotate .5s ease;
+        }
+        @media (hover: hover){
+            &:hover{
+                box-shadow: 0 0 20px -3px $neon-green;
+            }
+
+            &:hover > img{
+                rotate: 360deg;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 572px){
+    .content{
+
+        &__box{
+            padding: 32px 32px 64px;
+            width: clamp(300px, 80vw, 450px)
+        }
+    }
+}
